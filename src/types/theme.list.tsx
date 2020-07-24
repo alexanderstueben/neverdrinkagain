@@ -1,0 +1,1 @@
+export type ThemeList = 'blue-dark' | 'blue-light' | 'red-light' | 'red-dark';

@@ -1,4 +1,5 @@
 export type AppDrawerParamList = {
   Home: undefined;
-  About: undefined;
+  GameMode: undefined;
+  Task: undefined;
 }

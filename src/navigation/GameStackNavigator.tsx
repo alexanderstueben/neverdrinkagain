@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons/index';
 import { AppHeaderButton } from '../components/AppHeaderButton';
+import { Colors } from '../constants/Colors';
 import { ChoosePlayerScreen } from '../screens/ChoosePlayerScreen';
 import { HomeScreen } from '../screens/HomeScreen';
 import { AppDrawerParamList } from '../types/param-lists/AppDrawerParamList';
@@ -13,7 +14,13 @@ export const GameStackNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerTitleAlign: 'center'
+        headerTitleAlign: 'center',
+        headerStyle: {
+          backgroundColor: Colors.primary,
+        },
+        headerTitleStyle: {
+          fontFamily: 'itim'
+        }
       }}
     >
       <Stack.Screen
@@ -26,11 +33,6 @@ export const GameStackNavigator = () => {
               <Item title='Drawer' iconName='menu' onPress={() => navigation.toggleDrawer()} />
             </HeaderButtons>
           ),
-          /*headerRight: () => (
-            <HeaderButtons HeaderButtonComponent={AppHeaderButton}>
-              <Item title='Drawer' iconName='palette' />
-            </HeaderButtons>
-          )*/
         })}
       />
       <Stack.Screen

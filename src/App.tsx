@@ -1,22 +1,30 @@
 import { NavigationContainer } from '@react-navigation/native';
-import React from 'react';
-import { registerRootComponent } from 'expo'
-import { initDatabase } from './data/database';
+import React, { useState } from 'react';
+import { registerRootComponent, AppLoading } from 'expo'
+import * as Font from 'expo-font';
 import { AppDrawerNavigator } from './navigation/AppDrawerNavigator';
+import { Provider } from 'react-redux';
+import { AppStore } from './redux/stores/AppStore';
 
-initDatabase().then(() => {
-  console.log('database initialized');
-}).catch((err) => {
-  console.log('database init failed');
-  console.log(err);
-});
+const fetchFonts = () => {
+  return Font.loadAsync({
+    'itim': require('../assets/fonts/Itim-Regular.ttf')
+  });
+};
 
 const App = () => {
+  const [fontLoaded, setFontLoaded] = useState(false);
+
+  if (!fontLoaded) {
+    return <AppLoading startAsync={fetchFonts} onFinish={() => setFontLoaded(true)} />
+  }
 
   return (
-    <NavigationContainer>
-      <AppDrawerNavigator />
-    </NavigationContainer>
+    <Provider store={AppStore}>
+      <NavigationContainer>
+        <AppDrawerNavigator />
+      </NavigationContainer>
+    </Provider>
   );
 };
 

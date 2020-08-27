@@ -1,5 +1,7 @@
 export type GameMode = {
-  id: number;
+  id: string;
   title: string;
   description: string;
+  createDate: number;
+  updateDate: number;
 }

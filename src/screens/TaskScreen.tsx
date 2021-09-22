@@ -6,7 +6,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AppText } from '../components/AppText';
 import { ListItem } from '../components/ListItem';
 import { Colors } from '../constants/Colors';
-import { TaskActions } from '../redux/actions/TaskActions';
+import { TaskActions } from '../store/actions/TaskActions';
 import { TaskActionTypes } from '../types/action-types/TaskActionTypes';
 import { TasksScreenProps } from '../types/props/TasksScreenProps';
 import { AppState } from '../types/states/AppState';

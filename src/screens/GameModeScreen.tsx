@@ -12,7 +12,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AppText } from '../components/AppText';
 import { ListItem } from '../components/ListItem';
 import { Colors } from '../constants/Colors';
-import { GameModeActions } from '../redux/actions/GameModeActions';
+import { GameModeActions } from '../store/actions/GameModeActions';
 import { GameModeActionTypes } from '../types/action-types/GameModeActionTypes';
 import { GameModeScreenProps } from '../types/props/GameModeScreenProps';
 import { AppState } from '../types/states/AppState';

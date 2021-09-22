@@ -1,4 +1,4 @@
-import { ADD_GAMEMODE, SET_GAMEMODE, SET_GAMEMODE_BY_ID } from '../../redux/actions/GameModeActions';
+import { ADD_GAMEMODE, SET_GAMEMODE, SET_GAMEMODE_BY_ID } from '../../store/actions/GameModeActions';
 import { GameMode } from '../models/GameMode';
 
 export type AddGameModeActionType = {

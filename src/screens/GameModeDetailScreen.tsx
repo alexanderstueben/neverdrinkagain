@@ -12,7 +12,7 @@ import { GameModeActionTypes } from '../types/action-types/GameModeActionTypes';
 import { TaskActionTypes } from '../types/action-types/TaskActionTypes';
 import { GameModeDetailScreenProps } from '../types/props/GameModeDetailScreenProps';
 import { AppState } from '../types/states/AppState';
-import { GameModeState } from '../types/states/GameModeState';
+import { GamemodeState } from '../types/states/GamemodeState';
 import { TaskState } from '../types/states/TaskState';
 
 export const GameModeDetailScreen = (props: GameModeDetailScreenProps) => {
@@ -20,11 +20,11 @@ export const GameModeDetailScreen = (props: GameModeDetailScreenProps) => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError] = useState(undefined);
   const [modalVisible, setModalVisibile] = useState(false);
-  const gameMode = useSelector((state: AppState) => state.gameModes.selectedGameMode);
+  const gameMode = useSelector((state: AppState) => state.gamemodes.selectedGameMode);
   const gameModeTasks = useSelector((state: AppState) => state.tasks.gameModeTasks);
   const tasks = useSelector((state: AppState) => state.tasks.tasks);
 
-  const gameModeDispatch: ThunkDispatch<GameModeState, {}, GameModeActionTypes> = useDispatch();
+  const gameModeDispatch: ThunkDispatch<GamemodeState, {}, GameModeActionTypes> = useDispatch();
   const taskDispatch: ThunkDispatch<TaskState, {}, TaskActionTypes> = useDispatch();
 
   const loadGameMode = useCallback(async () => {

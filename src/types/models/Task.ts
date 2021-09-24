@@ -4,5 +4,5 @@ export type Task = {
   category: string;
   createDate: number;
   updateDate: number;
-  gamemodes: string[];
+  gamemodes?: string[];
 }

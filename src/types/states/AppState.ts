@@ -1,7 +1,7 @@
-import { GameModeState } from './GameModeState';
+import { GamemodeState } from './GamemodeState';
 import { TaskState } from './TaskState';
 
 export type AppState = {
-  gameModes: GameModeState,
+  gamemodes: GamemodeState,
   tasks: TaskState
 }

@@ -1,19 +1,19 @@
 import { ADD_GAMEMODE, SET_GAMEMODE, SET_GAMEMODE_BY_ID } from '../../store/actions/GameModeActions';
-import { GameMode } from '../models/GameMode';
+import { Gamemode } from '../../entities/gamemode.entity';
 
 export type AddGameModeActionType = {
   type: typeof ADD_GAMEMODE,
-  gameMode: GameMode;
+  gamemode: Gamemode;
 }
 
 export type SetGameModeActionType = {
   type: typeof SET_GAMEMODE,
-  gameModes: GameMode[];
+  gamemodes: Gamemode[];
 }
 
 export type SetGameModeByIdActionType = {
   type: typeof SET_GAMEMODE_BY_ID,
-  gameMode: GameMode;
+  gamemode: Gamemode;
 }
 
 export type GameModeActionTypes = AddGameModeActionType | SetGameModeActionType | SetGameModeByIdActionType

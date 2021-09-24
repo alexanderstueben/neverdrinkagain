@@ -14,7 +14,7 @@ import { Colors } from '../constants/Colors';
 import { GameModeActions } from '../store/actions/GameModeActions';
 import { GameModeActionTypes } from '../types/action-types/GameModeActionTypes';
 import { AddGameModeScreenProps } from '../types/props/AddGameModeScreenProps';
-import { GameModeState } from '../types/states/GameModeState';
+import { GamemodeState } from '../types/states/GamemodeState';
 
 export const AddGameModeScreen = (props: AddGameModeScreenProps) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -23,7 +23,7 @@ export const AddGameModeScreen = (props: AddGameModeScreenProps) => {
   const [description, setDescription] = useState('');
   const { navigation } = props;
 
-  const dispatch: ThunkDispatch<GameModeState, {}, GameModeActionTypes> = useDispatch();
+  const dispatch: ThunkDispatch<GamemodeState, {}, GameModeActionTypes> = useDispatch();
 
   useEffect(() => {
     if (error) {

@@ -1,8 +1,9 @@
 import * as SQLite from 'expo-sqlite';
 import * as FileSystem from 'expo-file-system';
 import { Asset } from "expo-asset";
-
-const db = SQLite.openDatabase('neverdrinkagain.db');
+import { createConnection } from 'typeorm/browser';
+import { Task } from '../entities/task.entity';
+import { Gamemode } from '../entities/gamemode.entity';
 
 export const Database = {
   init: async () => {
@@ -16,20 +17,13 @@ export const Database = {
       console.log('database was created');
     }
   },
-  fetch: () => {
-    return new Promise((resolve, reject) => {
-      db.transaction(tx => {
-        tx.executeSql(
-            'SELECT * FROM tasks;',
-            [],
-            (_, data) => {
-              resolve(data);
-            },
-            (_, err) => {
-              reject(err);
-              return false
-            });
-      })
-    })
+  connect: () => {
+    return createConnection({
+      database: 'neverdrinkagain.db',
+      driver: require('expo-sqlite'),
+      entities: [Task, Gamemode],
+      synchronize: false,
+      type: 'expo'
+    });
   }
 }

@@ -1,5 +1,5 @@
 import { ADD_TASK, SET_TASKS, SET_TASKS_BY_GAMEMODE_ID, UPDATE_TASK } from '../../store/actions/TaskActions';
-import { Task } from '../models/Task';
+import { Task } from '../../entities/task.entity';
 
 export type SetTasksByGameModeIdActionType = {
   type: typeof SET_TASKS_BY_GAMEMODE_ID,

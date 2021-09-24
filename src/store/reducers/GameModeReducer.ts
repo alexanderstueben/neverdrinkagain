@@ -1,33 +1,33 @@
 import { GameModeActionTypes } from '../../types/action-types/GameModeActionTypes';
-import { GameModeState } from '../../types/states/GameModeState';
+import { GamemodeState } from '../../types/states/GamemodeState';
 
-const initialState: GameModeState = {
-  gameModes: [],
-  selectedGameMode: {
+const initialState: GamemodeState = {
+  gamemodes: [],
+  selectedGamemode: {
     title: 'INIT',
     description: 'INIT',
-    id: 'INIT',
-    createDate: 0,
-    updateDate: 0
+    id: 0,
+    createDate: 'INIT',
+    updateDate: 'INIT'
   }
 }
 
-export const GameModeReducer = (state: GameModeState = initialState, action: GameModeActionTypes): GameModeState => {
+export const GameModeReducer = (state: GamemodeState = initialState, action: GameModeActionTypes): GamemodeState => {
   switch (action.type) {
     case 'SET_GAMEMODE':
       return {
         ...state,
-        gameModes: action.gameModes
+        gamemodes: action.gamemodes
       }
     case 'SET_GAMEMODE_BY_ID':
       return {
         ...state,
-        selectedGameMode: action.gameMode
+        selectedGamemode: action.gamemode
       }
     case 'ADD_GAMEMODE':
       return {
         ...state,
-        gameModes: state.gameModes.concat(action.gameMode)
+        gamemodes: state.gamemodes.concat(action.gamemode)
       }
     default:
       return state;

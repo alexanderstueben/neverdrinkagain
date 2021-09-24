@@ -16,14 +16,14 @@ import { GameModeActions } from '../store/actions/GameModeActions';
 import { GameModeActionTypes } from '../types/action-types/GameModeActionTypes';
 import { GameModeScreenProps } from '../types/props/GameModeScreenProps';
 import { AppState } from '../types/states/AppState';
-import { GameModeState } from '../types/states/GameModeState';
+import { GamemodeState } from '../types/states/GamemodeState';
 
 export const GameModeScreen = (props: GameModeScreenProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError] = useState(undefined);
-  const gameModes = useSelector((state: AppState) => state.gameModes.gameModes);
-  const dispatch: ThunkDispatch<GameModeState, {}, GameModeActionTypes> = useDispatch();
+  const gameModes = useSelector((state: AppState) => state.gamemodes.gamemodes);
+  const dispatch: ThunkDispatch<GamemodeState, {}, GameModeActionTypes> = useDispatch();
 
   const loadGameModes = useCallback(async () => {
     setError(undefined);

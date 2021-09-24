@@ -1,5 +1,5 @@
 export type GameModeStackParamList = {
   GameMode: undefined;
-  GameModeDetail: { id: string, title: string };
+  GameModeDetail: { id: number, title: string };
   AddGameMode: undefined;
 }

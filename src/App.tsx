@@ -1,6 +1,8 @@
+import "reflect-metadata";
 import { NavigationContainer } from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import { registerRootComponent, AppLoading } from 'expo'
+import { registerRootComponent } from 'expo'
+import AppLoading from 'expo-app-loading';
 import * as Font from 'expo-font';
 import { Database } from './data/Database';
 import { AppDrawerNavigator } from './navigation/AppDrawerNavigator';
@@ -26,16 +28,15 @@ const App = () => {
   const [fontLoaded, setFontLoaded] = useState(false);
 
   const loadDB = async () => {
-    const res = await Database.fetch();
-    console.log(res);
+    await Database.connect();
   }
 
   useEffect(() => {
     loadDB()
-  }, [loadDB]);
+  }, []);
 
   if (!fontLoaded) {
-    return <AppLoading startAsync={fetchFonts} onFinish={() => setFontLoaded(true)} />
+    return <AppLoading startAsync={fetchFonts} onFinish={() => setFontLoaded(true)} onError={console.warn} />
   }
 
   return (

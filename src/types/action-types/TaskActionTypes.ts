@@ -1,9 +1,14 @@
-import { ADD_TASK, SET_TASKS, SET_TASKS_BY_GAMEMODE_ID, UPDATE_TASK } from '../../store/actions/TaskActions';
+import {
+  ADD_TASK,
+  SET_TASKS,
+  SET_TASKS_WITH_GAMEMODES,
+  UPDATE_TASK
+} from '../../store/actions/TaskActions';
 import { Task } from '../../entities/task.entity';
 
-export type SetTasksByGameModeIdActionType = {
-  type: typeof SET_TASKS_BY_GAMEMODE_ID,
-  tasks: Task[]
+export type SetTasksWithGamemodesActionType = {
+  type: typeof SET_TASKS_WITH_GAMEMODES,
+  tasksWithGamemodes: Task[]
 }
 
 export type SetTasksActionType = {
@@ -27,4 +32,4 @@ export type UpdateTaskActionType = {
   };
 }
 
-export type TaskActionTypes = SetTasksByGameModeIdActionType | SetTasksActionType | AddTaskActionType | UpdateTaskActionType
+export type TaskActionTypes = SetTasksWithGamemodesActionType | SetTasksActionType | AddTaskActionType | UpdateTaskActionType

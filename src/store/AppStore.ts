@@ -4,6 +4,6 @@ import ReduxThunk from 'redux-thunk';
 import { TaskReducer } from './reducers/TaskReducer';
 
 export const AppStore = createStore(combineReducers({
-  gameModes: GameModeReducer,
+  gamemodes: GameModeReducer,
   tasks: TaskReducer
 }), applyMiddleware(ReduxThunk));

@@ -1,7 +1,7 @@
-import { Task } from '../models/Task';
+import { Task } from '../../entities/task.entity';
 
 export type TaskState = {
   tasks: Task[];
   selectedTask: Task;
-  gameModeTasks: Task[];
+  tasksWithGamemodes: Task[];
 }

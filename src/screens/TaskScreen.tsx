@@ -65,7 +65,8 @@ export const TaskScreen = (props: TasksScreenProps) => {
         refreshing={isRefreshing}
         style={styles.list}
         data={tasks}
-        renderItem={data => <ListItem title={data.item.text} touchable onPress={() => {}} />}
+        keyExtractor={item => item.id ? item.id.toString() : ''}
+        renderItem={data => <ListItem title={data.item.text} touchable onPress={() => props.navigation.navigate('TaskDetail')} />}
       />
     </View>
   );

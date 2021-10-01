@@ -22,7 +22,7 @@ export const GameModeScreen = (props: GameModeScreenProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError] = useState(undefined);
-  const gameModes = useSelector((state: AppState) => state.gamemodes.gamemodes);
+  const gamemodes = useSelector((state: AppState) => state.gamemodes.gamemodes);
   const dispatch: ThunkDispatch<GamemodeState, {}, GameModeActionTypes> = useDispatch();
 
   const loadGameModes = useCallback(async () => {
@@ -70,8 +70,9 @@ export const GameModeScreen = (props: GameModeScreenProps) => {
         onRefresh={loadGameModes}
         refreshing={isRefreshing}
         style={styles.list}
-        data={gameModes}
-        renderItem={data => <ListItem title={data.item.title} touchable onPress={() => props.navigation.navigate('GameModeDetail', { id: data.item.id, title: data.item.title })} />}
+        data={gamemodes}
+        keyExtractor={item => item.id ? item.id.toString(): ''}
+        renderItem={data => <ListItem title={data.item.title} touchable onPress={() => props.navigation.navigate('GameModeDetail', { id: data.item.id ? data.item.id : 0, title: data.item.title })} />}
       />
     </View>
   );

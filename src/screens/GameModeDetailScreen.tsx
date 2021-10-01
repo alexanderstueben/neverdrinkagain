@@ -19,51 +19,51 @@ export const GameModeDetailScreen = (props: GameModeDetailScreenProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError] = useState(undefined);
-  const [modalVisible, setModalVisibile] = useState(false);
-  const gameMode = useSelector((state: AppState) => state.gamemodes.selectedGameMode);
-  const gameModeTasks = useSelector((state: AppState) => state.tasks.gameModeTasks);
+  const [modalVisible, setModalVisible] = useState(false);
+  const gamemode = useSelector((state: AppState) => state.gamemodes.selectedGamemode);
+  const gamemodeTasks = useSelector((state: AppState) => state.tasks.gamemodeTasks);
   const tasks = useSelector((state: AppState) => state.tasks.tasks);
 
-  const gameModeDispatch: ThunkDispatch<GamemodeState, {}, GameModeActionTypes> = useDispatch();
+  const gamemodeDispatch: ThunkDispatch<GamemodeState, {}, GameModeActionTypes> = useDispatch();
   const taskDispatch: ThunkDispatch<TaskState, {}, TaskActionTypes> = useDispatch();
 
   const loadGameMode = useCallback(async () => {
     setError(undefined);
     setIsRefreshing(true);
     try {
-      await gameModeDispatch(GameModeActions.fetchGameModeById(props.route.params.id));
-      await taskDispatch(TaskActions.fetchTasksByGameModeId(props.route.params.id));
+      await gamemodeDispatch(GameModeActions.fetchGameModeById(props.route.params.id));
+      // await taskDispatch(TaskActions.fetchTasksByGameModeId(props.route.params.id));
       await taskDispatch(TaskActions.fetchTasks());
     } catch (err) {
       setError(err.message);
     }
     setIsRefreshing(false);
-  }, [gameModeDispatch, taskDispatch, setIsRefreshing, setError]);
+  }, [gamemodeDispatch, taskDispatch, setIsRefreshing, setError]);
 
-  const submitTaskHandler = useCallback(async (taskId: string) => {
+  const submitTaskHandler = useCallback(async (taskId: number) => {
     setError(undefined);
     setIsLoading(true);
     const gamemodes = tasks.find(task => task.id === taskId)?.gamemodes;
     if (gamemodes) {
-      gamemodes.push(props.route.params.id);
+      gamemodes.push(props.route.params.id.toString());
     }
     const newGameModes = gamemodes ? gamemodes : [props.route.params.id]
     try {
       await taskDispatch(TaskActions.updateTask(taskId, undefined, undefined, newGameModes));
       await loadGameMode();
-      setModalVisibile(false);
+      setModalVisible(false);
     } catch (err) {
       setError(err);
     }
     setIsLoading(false);
-  }, [props, taskDispatch, setError, setIsLoading, setModalVisibile])
+  }, [props, taskDispatch, setError, setIsLoading, setModalVisible])
 
   useEffect(() => {
     setIsLoading(true);
     loadGameMode().then(() => {
       setIsLoading(false);
     });
-  }, [loadGameMode, gameModeDispatch, taskDispatch, setIsLoading])
+  }, [loadGameMode, gamemodeDispatch, taskDispatch, setIsLoading])
 
   if (error) {
     return (
@@ -88,7 +88,7 @@ export const GameModeDetailScreen = (props: GameModeDetailScreenProps) => {
         visible={modalVisible}
       >
         {/*<View style={{flexDirection: 'row', justifyContent: 'space-between', padding: 10}}>
-          <TouchableOpacity onPress={() => setModalVisibile(false)}>
+          <TouchableOpacity onPress={() => setModalVisible(false)}>
             <MaterialIcons name='close' size={22} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => {}}>
@@ -96,22 +96,22 @@ export const GameModeDetailScreen = (props: GameModeDetailScreenProps) => {
           </TouchableOpacity>
         </View>*/}
         <View style={{alignItems: 'flex-end', padding: 10}}>
-          <TouchableOpacity onPress={() => setModalVisibile(false)}>
+          <TouchableOpacity onPress={() => setModalVisible(false)}>
             <MaterialIcons name='close' size={22} />
           </TouchableOpacity>
         </View>
         <FlatList
           style={{borderTopWidth: 1, borderTopColor: '#ccc'}}
-          data={tasks.filter(task => !task.gamemodes?.includes(gameMode.id))}
+          data={tasks.filter(task => !task.gamemodes?.includes(gamemode.id))}
           renderItem={(data) => <ListItem title={data.item.text} touchable onPress={() => submitTaskHandler(data.item.id)} />}
         />
       </Modal>
       <View style={styles.info}>
-        <AppText style={styles.text}>{gameMode.description}</AppText>
+        <AppText style={styles.text}>{gamemode.description}</AppText>
       </View>
       <View style={styles.row}>
         <AppText style={styles.text}>Tasks:</AppText>
-        <TouchableOpacity onPress={() => setModalVisibile(true)} >
+        <TouchableOpacity onPress={() => setModalVisible(true)} >
           <MaterialIcons size={22} name='add'/>
         </TouchableOpacity>
       </View>
@@ -119,7 +119,7 @@ export const GameModeDetailScreen = (props: GameModeDetailScreenProps) => {
         onRefresh={loadGameMode}
         refreshing={isRefreshing}
         style={styles.list}
-        data={gameModeTasks}
+        data={gamemodeTasks}
         renderItem={data => <ListItem title={data.item.text} />}
       />
     </View>

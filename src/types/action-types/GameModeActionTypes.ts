@@ -11,9 +11,9 @@ export type SetGameModeActionType = {
   gamemodes: Gamemode[];
 }
 
-export type SetGameModeByIdActionType = {
+export type SetGamemodeByIdActionType = {
   type: typeof SET_GAMEMODE_BY_ID,
   gamemode: Gamemode;
 }
 
-export type GameModeActionTypes = AddGameModeActionType | SetGameModeActionType | SetGameModeByIdActionType
+export type GameModeActionTypes = AddGameModeActionType | SetGameModeActionType | SetGamemodeByIdActionType

@@ -2,7 +2,7 @@ import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import {
   AddGameModeActionType,
   SetGameModeActionType,
-  SetGameModeByIdActionType
+  SetGamemodeByIdActionType
 } from '../../types/action-types/GameModeActionTypes';
 import { GamemodeState } from '../../types/states/GamemodeState';
 import { getRepository } from 'typeorm';
@@ -47,28 +47,17 @@ export const GameModeActions = {
   fetchGameModes: (): ThunkAction<Promise<void>, GamemodeState, {}, SetGameModeActionType> => {
     return async (dispatch: ThunkDispatch<GamemodeState, {}, SetGameModeActionType>) => {
       const gamemodes = await getRepository(Gamemode).find();
-      console.log(gamemodes);
       dispatch({ type: SET_GAMEMODE, gamemodes });
     }
   },
-  // fetchGameModeById: (id: string): ThunkAction<Promise<void>, GameModeState, {}, SetGameModeByIdActionType> => {
-  //   return async (dispatch: ThunkDispatch<GameModeState, {}, SetGameModeByIdActionType>) => {
-  //     const response = await fetch(`http://10.0.19.31:9000/gamemodes/${id}.json?ns=neverdrinkagain-app`);
-  //     if (!response.ok) {
-  //       throw new Error(`Error while getting gamemode ${id} !`);
-  //     }
-  //     const data: GameMode = await response.json();
-  //     const gameMode: GameMode = {
-  //       id: id,
-  //       title: data.title,
-  //       description: data.description,
-  //       createDate: data.createDate,
-  //       updateDate: data.updateDate
-  //     }
-  //
-  //     dispatch({ type: SET_GAMEMODE_BY_ID, gameMode });
-  //   }
-  // }
+  fetchGameModeById: (id: number): ThunkAction<Promise<void>, GamemodeState, {}, SetGamemodeByIdActionType> => {
+    return async (dispatch: ThunkDispatch<GamemodeState, {}, SetGamemodeByIdActionType>) => {
+      const gamemode = await getRepository(Gamemode).findOne(id);
+      if (gamemode) {
+        dispatch({ type: SET_GAMEMODE_BY_ID, gamemode });
+      }
+    }
+  }
 }
 
 

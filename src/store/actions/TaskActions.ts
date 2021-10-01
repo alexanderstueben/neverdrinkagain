@@ -2,16 +2,17 @@ import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import {
   AddTaskActionType,
   SetTasksActionType,
-  SetTasksByGameModeIdActionType, TaskActionTypes, UpdateTaskActionType
+  SetTasksWithGamemodesActionType, TaskActionTypes, UpdateTaskActionType
 } from '../../types/action-types/TaskActionTypes';
 // import { Task } from '../../types/models/Task';
 import { TaskState } from '../../types/states/TaskState';
 import { getRepository } from 'typeorm';
 import { Task } from '../../entities/task.entity';
+import { Gamemode } from '../../entities/gamemode.entity';
 
 export const SET_TASKS = 'SET_TASKS';
 export const SET_TASK_BY_ID = 'SET_TASK_BY_ID';
-export const SET_TASKS_BY_GAMEMODE_ID = 'SET_TASKS_BY_GAMEMODE_ID'
+export const SET_TASKS_WITH_GAMEMODES = 'SET_TASKS_WITH_GAMEMODES'
 export const ADD_TASK = 'ADD_TASK';
 export const UPDATE_TASK = 'UPDATE_TASK';
 
@@ -22,6 +23,14 @@ export const TaskActions = {
       dispatch({ type: SET_TASKS, tasks });
     }
   },
+  fetchTasksWithGamemodes: (): ThunkAction<Promise<void>, TaskState, {}, SetTasksWithGamemodesActionType> => {
+    return async (dispatch: ThunkDispatch<TaskState, {}, SetTasksWithGamemodesActionType>) => {
+      const tasksWithGamemodes = await getRepository(Task).findOne(1, { relations: ['gamemodes'] })
+      if (tasksWithGamemodes) {
+        dispatch({ type: SET_TASKS_WITH_GAMEMODES, tasksWithGamemodes: [tasksWithGamemodes] });
+      }
+    }
+}
   // fetchTasksByGameModeId: (gameModeId: string): ThunkAction<Promise<void>, TaskState, {}, SetTasksByGameModeIdActionType> => {
   //   return async (dispatch: ThunkDispatch<TaskState, {}, SetTasksByGameModeIdActionType>) => {
   //     const response = await fetch(`http://10.0.19.31:9000/tasks.json?ns=neverdrinkagain-app`);
